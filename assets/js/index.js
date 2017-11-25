@@ -35,22 +35,23 @@ document.addEventListener('DOMContentLoaded', function () {
   })
   var links = [{
     icon: 'fa-code-fork',
-    url: 'https://github.com/harttle/harttle.github.io',
+    url: 'https://gitee.com/chuangPeng',
     target: '_blank'
   }, {
     plugin: 'rss',
-    url: 'http://harttle.com/feed.xml',
+    url: 'http://searchuang.com/feed.xml',
     target: '_blank'
   }, {
     icon: 'fa-envelope',
     background: '#5484d6',
-    url: 'mailto:harttle@harttle.com?subject=来自HarttleLand'
+    url: 'mailto:cp9266@gmail.com?subject=来自彭创'
   }, {
     plugin: 'qrcode',
     title: '扫一扫！'
   }, {
-    plugin: 'linkedin',
-    url: 'https://linkedin.com/in/harttle',
+    icon: 'fa-qq',
+    background: '#5484d6',
+    url: 'http://wpa.qq.com/msgrd?v=3&uin=734180379&site=qq&menu=yes',
     target: '_blank'
   }]
   socialShare($('.follow').get(0), links, {size: 'sm'})

@@ -1,7 +1,7 @@
-title: Harttle Land
+title: Chuang Peng
 description: 分享技术，共建开放平台
-url: http://harttle.com
-author: Harttle
+url: http://searchuang.com
+author: Chuang Peng
 logo: assets/img/favicon.png
 keywords: 
   - Web
@@ -79,6 +79,7 @@ gems:
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-redirect-from
+  - jekyll-paginate
 
 whitelist:
   - jekyll-redirect-from

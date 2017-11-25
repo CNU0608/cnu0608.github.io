@@ -17,16 +17,8 @@
       vertical-align: middle;
       font-size: 24px;
     }
-    .logo-h{
-      color: $green;
-      font-size: 32px;
-      transition: color .15s;
-    }
-    &:hover .logo-h{
-      color: white;
-    }
-    .logo-land{
-      margin-left: 5px;
+    &:hover .logo-searchuang{
+      color: #5ABA59;
     }
   }
   .desc{
