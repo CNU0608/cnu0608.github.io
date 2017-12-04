@@ -1,7 +1,7 @@
 {
-  "name": "harttle.com",
+  "name": "searchuang.com",
   "version": "1.0.0",
-  "description": "source code for http://harttle.com",
+  "description": "source code for http://searchuang.com",
   "devDependencies": {
     "eslint": "^4.2.0",
     "eslint-config-es5": "^0.5.0"
@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/harttle/harttle.github.io.git"
+    "url": "git+https://github.com/CNU0608/cnu0608.github.io.git"
   },
-  "author": "harttle <harttle@harttle.com>",
+  "author": "searchuang <cp9266@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/harttle/harttle.github.io/issues"
+    "url": "https://github.com/CNU0608/cnu0608.github.io/issues"
   },
-  "homepage": "https://github.com/harttle/harttle.github.io#readme"
+  "homepage": "https://github.com/CNU0608/cnu0608.github.io#readme"
 }
