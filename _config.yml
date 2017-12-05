@@ -26,11 +26,8 @@ kramdown:
   input: GFM
   hard_wrap: false
 
-ga: 'UA-65795020-1'
-adsense:
+ga: 'UA-110608730-1'
 disqus: 'searchuang'
-twitter:
-  username: searchuang
 
 sass:
     style: compressed

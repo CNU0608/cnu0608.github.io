@@ -104,8 +104,6 @@ document.addEventListener('DOMContentLoaded', function () {
           return post
         })
 
-      console.log('similar posts:', mostSim, secondSim, thirdSim)
-
       if (!mostSim) {
         console.info('no similar posts found, recommendation disabled')
         return
