@@ -1,17 +1,27 @@
-title: Chuang Peng
-description: 分享技术，共建开放平台
+title: Chuang Peng | 彭创 
+description: 彭创，一名前端开发者 | 爱分享互联网技术，共享前端博客开放平台
 url: http://searchuang.com
-author: Chuang Peng
+author: 彭创 | Chuang Peng
 logo: assets/img/favicon.png
 keywords: 
+  - 彭创
+  - searchuang
+  - 博客
   - Web
   - HTML
   - CSS
+  - HTML5
+  - CSS3
   - JavaScript
   - C++
   - Linux
   - Bash
   - Vim
+  - Node
+  - React
+  - Vue
+  - 微信小程序
+  - Webpack
 
 permalink: /:year/:month/:day/:title.html
 paginate: 7
