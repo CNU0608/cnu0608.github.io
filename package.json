@@ -1,25 +1,25 @@
 {
-  "name": "searchuang.com",
-  "version": "1.0.0",
-  "description": "source code for http://searchuang.com",
-  "devDependencies": {
-    "eslint": "^4.2.0",
-    "eslint-config-es5": "^0.5.0"
-  },
-  "scripts": {
-    "lint": "eslint assets/js",
-    "start": "bundle exec jekyll serve -w --drafts --host localhost --incremental",
-    "build": "bundle exec jekyll build --incremental",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CNU0608/cnu0608.github.io.git"
-  },
-  "author": "searchuang <cp9266@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/CNU0608/cnu0608.github.io/issues"
-  },
-  "homepage": "https://github.com/CNU0608/cnu0608.github.io#readme"
+    "name": "ChuangPeng",
+    "version": "1.0.0",
+    "description": "source code for https://cp9266.github.io/",
+    "devDependencies": {
+        "eslint": "^4.2.0",
+        "eslint-config-es5": "^0.5.0"
+    },
+    "scripts": {
+        "lint": "eslint assets/js",
+        "start": "bundle exec jekyll serve -w --drafts --host localhost --incremental --no-watch",
+        "build": "bundle exec jekyll build --incremental",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cp9266/cp9266.github.io.git"
+    },
+    "author": "searchuang <cp9266@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/cp9266/cp9266.github.io/issues"
+    },
+    "homepage": "https://github.com/cp9266/cp9266.github.io#readme"
 }
