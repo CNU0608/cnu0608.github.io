@@ -1,11 +1,12 @@
 title: Chuang Peng
 description: 彭创，一名Web前端开发者 | 爱分享互联网技术 | 共享前端博客开放平台
 url: https://cp9266.github.io
-author: 彭创 | Chuang Peng
+author: Chuang Peng
+email: cp9266@gmailcom
 logo: assets/img/favicon.png
 keywords: 
   - 彭创
-  - searchuang
+  - cp9266
   - 博客
   - Web
   - HTML
@@ -27,31 +28,19 @@ permalink: /:year/:month/:day/:title.html
 paginate: 7
 paginate_path: "page:num"
 markdown: kramdown
-markdown_ext:  md
+markdown_ext: md
 excerpt_separator: "<!--more-->"
 highlighter: rouge
 lsi: false
-exclude: ['README.md', '.*', 'bin/', 'Gemfile', 'node_modules', '*.log', 'package.json']
+exclude: ['README.md', '.*', 'bin/', 'Gemfile', 'node_modules', '*.log', 'package.json', 'vendor']
 kramdown:
   input: GFM
   hard_wrap: false
 
 ga: 'UA-110608730-1'
-disqus: 'searchuang'
 
 sass:
     style: compressed
-
-collections:
-  effective-cpp:
-    output: true
-    permalink: /:year/:month/:day/:title.html
-  git-workflow:
-    output: true
-    permalink: /:year/:month/:day/:title.html
-  vim-practice:
-    output: true
-    permalink: /:year/:month/:day/:title.html
 
 defaults:
   -
@@ -64,29 +53,15 @@ defaults:
       path: "_posts"
     values:
       layout: "blog"
-  -
-    scope:
-      path: "_effective-cpp"
-    values:
-      layout: "blog"
-  -
-    scope:
-      path: "_git-workflow"
-    values:
-      layout: "blog"
-  -
-    scope:
-      path: "_vim-practice"
-    values:
-      layout: "blog"
+
+series:
+  'Effective-C++': '/effective-cpp.html'
+  'Vim-Practice': '/vim-practice.html'
+  'Git-Workflow': '/git-workflow.html'
 
 plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-paginate
-  - jekyll-seo-tag
   - jekyll-redirect-from
-  - jekyll-paginate
-
-whitelist:
-  - jekyll-redirect-from
+  - jekyll-include-cache

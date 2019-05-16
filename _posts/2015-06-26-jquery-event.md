@@ -14,7 +14,7 @@ $('body').on('click', 'a[rel^=lightbox], ...', function(event){});
 本文便来详解各种jQuery事件绑定方法：`on`，`bind`，`delegate`，`live`，`unbind`，`trigger`。
 同时总结一下常用的jQuery事件技术：如何阻止事件冒泡、阻止浏览器默认行为、解绑事件处理函数、自定义事件。
 
-# 什么是 jQuery 事件
+## 什么是 jQuery 事件
 
 [jQuery事件][je]是DOM事件的封装，同时支持自定义的扩展。在程序设计中，事件和代理有着相似的作用：
 它们提供了一种机制，使得行为的实现方式和调用时机可以分离。
@@ -33,7 +33,7 @@ jQuery事件是通过封装javascript事件来实现的，例如`.keyup()`便是
 * 触发事件：`trigger('keyup')`、`keyup()`；
 * 解绑事件：`unbind`、`off`、`die`、`undelegate`。
 
-# 事件绑定：bind
+## 事件绑定：bind
 
 使用javascript绑定一个事件很简单，只需要在HTML中设置`onxxx`属性，
 并且在javascript中定义相关的处理函数便可以完成。
@@ -75,7 +75,7 @@ $('#foo').unbind('click');
 
 <!--more-->
 
-# 事件冒泡与默认行为
+## 事件冒泡与默认行为
 
 在DOM中默认情况下，事件是会冒泡的，即同样的事件会沿着DOM树逐级触发。
 有时这是我们不希望的行为，可以在事件处理函数中阻止它。
@@ -113,7 +113,7 @@ $('a').click(function(event){
 });
 ```
 
-# 自定义事件
+## 自定义事件
 
 jQuery事件是基于DOM事件的，但jQuery提供了更加普遍的事件机制。
 这使得我们可以方便地自定义事件，只需要给一个尚不存在的事件名即可：
@@ -121,24 +121,24 @@ jQuery事件是基于DOM事件的，但jQuery提供了更加普遍的事件机�
 ```html
 <div id='foo'></div>
 <script>
-$('#foo').bind('fucked', function(){
-    console.log("I'm fucked.");
+$('#foo').bind('update', function(){
+    console.log("I'm updated.");
 });
-$('#foo').trigger('fucked');
+$('#foo').trigger('update');
 </script>
 ```
 
-这里定义了一个叫`fucked`的事件并绑定了处理函数，然后使用`trigger`来触发该事件。
+这里定义了一个叫`update`的事件并绑定了处理函数，然后使用`trigger`来触发该事件。
 在真实的场景中，通常用其他的事件来触发自定义事件：
 
 ```javascript
 var he = 'man';
 $('#foo').click(function(){
-    if(he === 'man') $(this).trigger('fucked');
+    if(he === 'man') $(this).trigger('update');
 });
 ```
 
-# Delegate
+## Delegate
 
 `.delegate`是另一种绑定事件的方式。它将事件处理函数绑定在指定的根元素上，
 由于事件会冒泡，它用来处理指定的子元素上的事件。
@@ -164,7 +164,7 @@ $('#root').delegate('a', 'click', function(){
 
 > 如果你在使用AngularJS等动态操作DOM的工具，那么`.delegate()`将会非常实用，它能对新增的DOM元素自动绑定。
 
-# On
+## On
 
 事实上，`.on()`才是jQuery事件的提供者。其他的事件绑定方法都是通过`.on()`来实现的，请看jQuery1.8.2的源码：
 
@@ -207,7 +207,7 @@ $( "#root" ).on( "click", "a", function( e ) {} );
 
 > 我们看到上面还有一个`.live()`方法，它与`delegate`是类似的，
 > 不过它强制指定了`root`是`document`（即`this.context`），因而性能略差。
-> 自jQuery1.7起已经不推荐使用了。参见： https://api.jquery.com/category/deprecated/deprecated-1.7/
+> 自jQuery1.7起已经不推荐使用了。参见： <https://api.jquery.com/category/deprecated/deprecated-1.7/>
 
 [je]: https://api.jquery.com/category/events/
 [ai]: /2015/05/31/angular-scope-initialize.html

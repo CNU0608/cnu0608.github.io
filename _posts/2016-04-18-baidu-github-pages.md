@@ -1,5 +1,4 @@
 ---
-layout: blog
 title: 通过设定解析线路让百度收录Github Pages
 tags: Git Github HTML HTTP 网络 搜索引擎
 ---
@@ -7,15 +6,15 @@ tags: Git Github HTML HTTP 网络 搜索引擎
 利用Github Pages创建博客的国内作者一定有这样的麻烦：
 Github对Baidu Spider的用户代理都会返回403状态码，因而百度无法收录博客内容。
 为解决此问题，小编在2016年01月21日在Gitcafe Pages（今Coding.net）创建镜像，
-并设置域名解析百度线路来的harttle.com到该镜像。
-如今百度已经可以正常收录harttle.com的文章了，撰文在此希望能帮到别人。
+并设置域名解析百度线路来的harttle.land到该镜像。
+如今百度已经可以正常收录harttle.land的文章了，撰文在此希望能帮到别人。
 
 * *一个域名*：百度收录、Google收录、用户访问的域名是相同的。
 * *免费使用*：不需要购买VPS或者CDN服务。
 * *实时同步*：不存在CDN的不同步的问题，同时也不存在CDN线路选择不确定的问题。
 * *不需备案*：使用Coding.net的域名做CNAME，不需自己备案。
 
-# 最终效果
+## 最终效果
 
 百度收录情况如下，21日创建镜像后22日就开始有页面被收录了。
 
@@ -27,7 +26,7 @@ Github对Baidu Spider的用户代理都会返回403状态码，因而百度无�
 
 ![baidu crawl](/assets/img/blog/baidu-crawl@2x.jpg)
 
-# 仓库同步
+## 仓库同步
 
 > 既然如今Gitcafe的Git仓库服务已经转移到了Coding.net，
 > 下文中以Coding.net中的配置为例。
@@ -44,22 +43,22 @@ git push coding.net coding-pages
 在Coding.net上看到自己的仓库代码后，在Pages设置页面中开启Pages服务。
 此时，可以访问<http://harttle.coding.me>来测试了（可能会有一分钟左右的延迟，之间会404）。
 
-# 域名配置
+## 域名配置
 
-首先在Coding.net的Pages页面绑定一个自定义域名：harttle.com。
-然后在域名解析控制台中，将百度线路来的harttle.com解析到pages.coding.me：
+首先在Coding.net的Pages页面绑定一个自定义域名：harttle.land。
+然后在域名解析控制台中，将百度线路来的harttle.land解析到pages.coding.me：
 
 ```
 记录类型 	主机记录 	解析线路 	记录值	            TTL	
 CNAME	    @	        百度	    pages.coding.me	    10分钟
 ```
 
-这样从百度线路来的请求都会被解析到pages.coding.me，在HTTP请求头中仍然包含harttle.com主机的信息。
-因为在Coding.net中设置了绑定harttle.com，所以Coding.net会很配合地接受该HTTP请求。
+这样从百度线路来的请求都会被解析到pages.coding.me，在HTTP请求头中仍然包含harttle.land主机的信息。
+因为在Coding.net中设置了绑定harttle.land，所以Coding.net会很配合地接受该HTTP请求。
 
 这样百度便可以正确地收到Github Pages页面了，我们只需要保持同步即可。
 
-# 同步脚本
+## 同步脚本
 
 我在这里写了一个同步脚本：
 
@@ -74,25 +73,25 @@ git checkout master
 
 你愿意的话也可以把它作为一个Github Hook来自动执行同步。
 
-# 镜像重定向
+## 镜像重定向
 
 上面在Coding.net创建的镜像站点有两种访问方式：
 
 1. 从百度内部线路访问。
 2. 通过<http://harttle.coding.me>访问。
 
-通过上述渠道访问站点的用户应当重定向到harttle.com，同时百度Spider不应被重定向。
+通过上述渠道访问站点的用户应当重定向到harttle.land，同时百度Spider不应被重定向。
 解决这个问题很简单，在coding-pages分支中的HTML Head中添加脚本的重定向即可：
 
 ```html
 <script>
-  location.href='http://harttle.com' + location.pathname;
+  location.href='https://harttle.land' + location.pathname;
 </script>
 ```
 
 这样，所有来自浏览器的访问就会被重定向到源站点，而搜索引擎则不会被影响。
 
-# Github Pages问题何在
+## Github Pages问题何在
 
 这不是技术问题。
 

@@ -1,29 +1,77 @@
 <!DOCTYPE html>
-<html class="module-default {%if page.fullSize %}full-size{%endif%}">
-  <head> {% include head.html %} </head>
-  <body id="body" >
+<html class="page-default" lang="zh-Hans">
 
-    <div class="banner {% if page.bannerTransparent %}transparent{% endif %}">
-      <div class="container-fluid">
-        <nav class="pull-right">
-          <a class="glow no-decoration" href="/tags.html">标签</a>
-          <a class="glow no-decoration" href="/archive.html">归档</a>
-          <a class="glow no-decoration" href="/about.html">关于</a>
-        </nav>
-        <a class="logo no-decoration" href="/">
-          <span class="logo-searchuang glow">SEARCHUANG</span>
-        </a>
-      </div>
-    </div>
+<head>
+    <meta charset="utf-8">
+    <title>{%if page.title%}{{page.title}} | {{site.title}}{%else%}{{site.title}}{%endif%}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="{{ page.tags | default: site.keywords | join: ',' }}">
+    <meta name="author" content="Chuang Peng (cp9266)">
+    <meta name="description" content="{{page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 128}}">
+    <meta name="theme-color" content="#5ABA59">
+    {% feed_meta %}
+    <link rel="shortcut icon" href="/assets/img/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="//utteranc.es">
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    <link rel="dns-prefetch" href="//www.google.com">
+</head>
 
-    <div class="site-content"> {{ content }} </div>
+<body>
+    <header class="clearfix">
+        <div class="container">
+            <nav class="pull-right">
+                <a class="glow no-decoration" href="/tags.html">标签</a>
+                <a class="glow no-decoration" href="/archive.html">归档</a>
+                <a class="glow no-decoration" href="/about.html">关于</a>
+            </nav>
+            <a class="logo no-decoration" href="/" aria-label="Chuang Peng">
+                <span class="logo-searchuang glow">CHUANG PENG</span>
+            </a>
+        </div>
+    </header>
+    {{ content }}
+    <footer id="footer">
+        <div class="container ellipsis">
+            Copyright © <span class="fullYear"></span> 彭创 All Right Reserved
+            and proudly hosted by <a href="https://cp9266.github.io/">Github</a>,
+            licensed under <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>.
+        </div>
+        <a href="#" id="btnScrolltop">&#x1f51d;</a>
+        <script>
+        // 更新年份信息
+        (function() {
+            var oFooter = document.getElementById('footer'),
+                oFullYear = oFooter.getElementsByClassName('fullYear')[0];
+            oFullYear.innerHTML = new Date().getFullYear();
+        })();
+        window.addEventListener('scroll', function() {
+            window.pageYOffset > 300 ?
+                btnScrolltop.setAttribute('class', 'show') :
+                btnScrolltop.removeAttribute('class');
+        });
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(reg) {
+                    console.log('ServiceWorker registration successful with scope: ', reg.scope);
+                }).catch(function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+        </script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{site.ga}}"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
 
-    <a href="#body" id="site-scroll-top" class="animate">
-      <span class="fa fa-chevron-up"></span>
-    </a>
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', '{{site.ga}}');
+        </script>
+    </footer>
+</body>
 
-    {% include footer.html %}
-    <script src="/assets/js/scrolltop.js"></script>
-
-  </body>
 </html>

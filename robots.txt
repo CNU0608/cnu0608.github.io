@@ -1,3 +1,2 @@
-Sitemap: http://searchuang.com/sitemap.xml
+Sitemap: https://cp9266.github.io/sitemap.xml
 User-agent: *
-Disallow: /page

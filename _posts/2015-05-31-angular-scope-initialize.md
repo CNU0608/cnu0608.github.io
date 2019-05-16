@@ -7,7 +7,7 @@ tags: AngularJS DOM HTML JavaScript MVC 模板 模块化 依赖注入 异步
 如果你的项目引入了AngularJS，同时还有不少的jQuery代码，你可能会碰到两者初始化顺序的问题。
 本文就来探讨AngularJS APP以及Controller的初始化过程和时机。
 
-# Angular APP
+## Angular APP
 
 一个Angular APP其实就是一个Angular Module，通常可以包含若干Controller、Service以及Directive。甚至不自己定义APP也可以启动一个Angular应用，例如：
 
@@ -37,7 +37,7 @@ app.controller('worldCtrl', ['$scope', function($scope){
 
 在`div[ng-app]`的子元素中可以使用该`app`下的所有控制器，**控制器可以嵌套，子控制器的`$scope`直接共享父控制器的`$scope`中的变量**。
 
-# Angular APP 的启动
+## Angular APP 的启动
 
 **同一个页面中可以包含多于一个的APP，但不能嵌套**。同一页面中有多于一个APP时AngularJS不会自动帮你启动APP了，你需要手动启动这些APP。例如：
 
@@ -48,7 +48,7 @@ angular.bootstrap(element, ['helloApp']);
 
 AngularJS通过依赖注入的方式来实现模块化与封装。在启动APP之前，往往需要注入一些APP所在环境的信息：
 
-> 这是常见的需求。因为在AngularJS中，尽量不要去操作DOM（除非你在写`directive`），否则可测试性会严重下降。参见 http://docs.angularjs.cn/guide/controller
+> 这是常见的需求。因为在AngularJS中，尽量不要去操作DOM（除非你在写`directive`），否则可测试性会严重下降。参见 <http://docs.angularjs.cn/guide/controller>
 
 ```javascript
 var app = angular.module('helloApp'); // 获得之前声明的那个叫helloApp的模块
@@ -60,7 +60,7 @@ app.constant('sessionInfo', {
 
 <!--more-->
 
-# APP启动时，控制器立即执行
+## APP启动时，控制器立即执行
 
 对于上文中的例子，**`helloApp`启动时，传入`worldCtrl`的构造函数会立即执行**。如若未显示地启动Angular APP，在页面载入时Angular会自动启动，构造函数在此时得以执行。
 
@@ -91,7 +91,7 @@ $(function(){
 
 > 当然，如果Controller中需要异步获取资源，上述的trick失效。此时最好使用Angular插件提供的各种Directive。
 
-# Link Scope时，控制器立即执行
+## Link Scope时，控制器立即执行
 
 有时，我们需要动态编译（`$compile`）HTML。有这样两种典型的场景：
 
@@ -100,7 +100,7 @@ $(function(){
 
 将HTML插入到Angular包括两个过程：
 
-* Compile：处理HTML，生成Linking函数，参见： http://docs.angularjs.cn/guide/compiler
+* Compile：处理HTML，生成Linking函数，参见： <http://docs.angularjs.cn/guide/compiler>
 * Link：将Compile结果与Scope结合，产生动态视图。
 
 例如：

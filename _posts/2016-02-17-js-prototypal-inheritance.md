@@ -1,5 +1,4 @@
 ---
-layout: blog
 title: JavaScript 实现原型继承
 tags: 原型继承 JavaScript 作用域 继承
 ---
@@ -13,7 +12,7 @@ tags: 原型继承 JavaScript 作用域 继承
 
 <!--more-->
 
-# 实现原型继承
+## 实现原型继承
 
 实现原型继承的第一步便是创建一些有用的、用来被继承的对象。比如：
 
@@ -35,7 +34,7 @@ var person = {
 ```javascript
 var man = Object.create(person);
 man.name = 'bob';
-man.fuck = function(){};
+man.talk = function(){};
 ```
 
 这里的`Man`拥有`Person`的所有属性，并且经过了特化。
@@ -49,7 +48,7 @@ Object.method('create', function(base){
 });
 ```
 
-# 一个有用的场景
+## 一个有用的场景
 
 在多数编程语言中，一对大括号定义一个作用域。
 子作用域继承自父作用域，并且拥有自己的标识符。

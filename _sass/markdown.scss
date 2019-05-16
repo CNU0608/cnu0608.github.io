@@ -1,70 +1,51 @@
 @import "variables";
+@import "mixins";
 
 .md {
   line-height: 1.8em;
+  overflow-wrap: break-word;
+  a, code, strong, em {
+    word-wrap: break-word;
+  }
 }
 
 .md > *:first-child {
   margin-top: 0;
 }
 
-.md {
-  overflow-wrap: break-word;
-}
-
-.md {
-  a, code, strong, em {
-    margin-left: 3px;
-    margin-right: 3px;
-    word-wrap: break-word;
-  }
-}
-
-.md pre code {
-  margin-left: 0;
-  margin-right: 0;
-}
-
 .md > * {
   overflow-x: auto;
   overflow-y: hidden;
+  word-break: break-all;
 }
 
 .md p {
   margin: 0 0 10px;
 }
 
-.md h1 {
+.md h1, .md h2 {
   margin: 50px 0 35px;
   padding-bottom: 2px;
   font-size: 24px;
   border-bottom: 1px solid #EEE;
 }
 
-.md h2 {
+.md h3 {
   margin: 40px 0 25px 0;
   font-size: 22px;
 }
 
-.md h3 {
+.md h4 {
   margin: 20px 0 10px 0;
   padding-bottom: 2px;
   font-size: 16px;
   font-style: italic;
 }
 
-.md h4 {
-  font-size: 16px;
-  line-height: 26px;
-  padding: 18px 0 4px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
 .md h5 {
   font-size: 16px;
   line-height: 26px;
-  padding: 14px 0 0;
+  padding: 18px 0 4px;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -93,7 +74,7 @@
   margin: 10px 0;
   border-left: 4px solid #DDD;
   padding: 0 0 0 11px;
-  color: #777;
+  color: #555;
   font-size: 14px;
   p {
     margin-top: 5px;
@@ -109,11 +90,13 @@
 
 .md code, .md pre {
   font-family: Consolas, "Liberation Mono", Courier, monospace;
-  font-size: 12px;
+  font-size: 0.9rem;
   line-height: 1.5em;
 }
 
 .md pre code {
+  margin-left: 0;
+  margin-right: 0;
   word-wrap: normal;
   white-space: pre;
   overflow-wrap: normal;
@@ -121,26 +104,10 @@
 
 .md *:not(pre) > code {
   border: 1px solid #ddd;
-  /*color: #777;*/
   color: $red;
-
-  /*#c03;*/
   background-color: #f8f8f8;
   border-radius: 3px;
   white-space: normal;
-
-  /*overcome bootstrap nowrap*/
-  padding: 3px 4px 0 4px;
-
-  /*overcome bootstrap padding*/
-}
-
-.md a, .md a code {
-  text-decoration: underline;
-}
-
-.md a:hover, .md a code:hover {
-  text-decoration: underline;
 }
 
 .md table {
@@ -171,7 +138,8 @@
 
 .md img {
   max-width: 100%;
-  margin-bottom: 10px;
+  margin: 0 auto 10px;
+  display: block;
 }
 
 .md img[src*='@2x'], .md img[alt*='@2x'] {
@@ -182,7 +150,29 @@
   zoom: 66.67%;
 }
 
-.MathJax {
+.md .MathJax {
   padding: 0 0.2em !important;
 }
 
+.md.excerpt {
+  color: #555;
+  p, h1, h2, h3, h4, h5, h6, b, strong, ul, ol, li{
+    font-size: 1rem;
+    margin: 0;
+    color: #555;
+    font-weight: normal;
+    border-bottom: none;
+  }
+  blockquote{
+    border-left: none;
+    padding: 0;
+    p, h1, h2, h3, h4, h5, h6, b, strong{
+      color: #555;
+    }
+  }
+  @include media-xs{
+    img, pre, table{
+      display: none;
+    }
+  }
+}

@@ -1,26 +1,24 @@
 ---
-layout: blog
-title: 如何检查JavaScript变量类型？
+title: 如何检查 JavaScript 变量类型？
 tags: JavaScript 构造函数 继承 原型链 类型检查 类型转换 iframe
-excerpt: 如果你要判断的是基本数据类型或JavaScript内置对象，使用toString；如果要判断的时自定义类型，请使用instanceof。
 ---
 
-JavaScript基本数据类型有5种：字符串、数字、布尔、null、undefined。
+JavaScript [基本数据类型有 6 种][types]：字符串、数字、布尔、null、undefined、Symbol。
 用户定义的类型（object）并没有类的声明，因此继承关系只能通过构造函数和原型链来检查。
 本文要解决的问题，如何检查一个变量的类型？先给结论：
 
 **如果你要判断的是基本数据类型或JavaScript内置对象，使用`toString`；
 如果要判断的时自定义类型，请使用`instanceof`**。
 
-不同的编程语言都有自己的方式来提供类型信息，例如C#的反射、[C++的Traits][traits]，
-JavaScript提供类型信息的方式更加灵活，因而也容易产生很多误用。
+不同的编程语言都有自己的方式来提供类型信息，例如 C# 的反射、[C++的Traits][traits]，
+JavaScript 提供类型信息的方式更加灵活（杂），因而也容易误用。
 下面来分析常见类型检查手段的区别：typeof, instanceof, constructor, toString。
 
 > 如果你在寻找类型转换的解决方案，而非类型检查，请移步[JavaScript类型转换][type-conv]。
 
 <!--more-->
 
-# typeof
+## typeof
 
 [typeof][typeof] 操作符返回的是类型字符串，它的返回值有6种取值：
 
@@ -50,7 +48,7 @@ typeof null     // "object"
 它是一个空指针表示对象为空，而`undefined`才表示什么都没有。
 总之，**typeof只能用于基本数据类型检测，对于`null`还有Bug**。
 
-# instanceof
+## instanceof
 
 [instanceof][instanceof]操作符用于检查某个对象的原型链是否包含某个构造函数的`prototype`属性。例如：
 
@@ -103,7 +101,7 @@ new String('abc') instanceof String // true
 
 但这时你已经知道数据类型了，类型检查已经没有意义了。
 
-# constructor
+## constructor
 
 [constructor][constructor]属性返回一个指向创建了该对象原型的函数引用。需要注意的是，该属性的值是那个函数本身。例如：
 
@@ -156,7 +154,7 @@ true.constructor === Boolean // true
 
 > 这种将一个值类型转换为对象引用类型的机制在其他语言中也存在，在C#中称为**装箱**（Boxing）。
 
-# 跨窗口问题
+## 跨窗口问题
 
 我们知道Javascript是运行在宿主环境下的，而每个宿主环境会提供一套ECMA标准的内置对象，以及宿主对象（如`window`, `document`），一个新的窗口即是一个新的宿主环境。
 不同窗口下的内置对象是不同的实例，拥有不同的内存地址。
@@ -182,7 +180,7 @@ iWindow.arr instanceof Array            // false
 iWindow.arr instanceof iWindow.Array    // true
 ```
 
-# toString
+## toString
 
 `toString`方法是最为可靠的类型检测手段，它会将当前对象转换为字符串并输出。
 `toString`属性定义在`Object.prototype`上，因而所有对象都拥有`toString`方法。
@@ -218,7 +216,7 @@ toString.call(new Animal)   // [object Object]
 和`Object.prototype.toString`类似地，`Function.prototype.toString`也有类似功能，
 不过它的`this`只能是`Function`，其他类型（例如基本数据类型）都会抛出异常。
 
-# 总结
+## 总结
 
 * `typeof`只能检测基本数据类型，对于`null`还有Bug；
 * `instanceof`适用于检测对象，它是基于原型链运作的；
@@ -239,10 +237,11 @@ isWindow: function(obj){
 ```
 
 另外DOM Element的类型检测也可以通过上述的方法来完成，但没有一种方法在任何浏览器上都可行。
-DOM Element的类型检测可以参见这篇文章： http://tobyho.com/2011/01/28/checking-types-in-javascript/
+DOM Element的类型检测可以参见这篇文章： <http://tobyho.com/2011/01/28/checking-types-in-javascript/>
 
 [type-conv]: /2015/08/21/js-type-conv.html
 [traits]: /2015/09/15/effective-cpp-47.html
 [typeof]: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof
 [instanceof]: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof
 [constructor]: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor
+[types]: https://tc39.github.io/ecma262/#sec-ecmascript-language-types

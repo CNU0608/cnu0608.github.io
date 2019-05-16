@@ -1,6 +1,6 @@
 ---
-title: 在 DOM 中动态插入并执行脚本
-tags: DOM HTML JavaScript jQuery
+title: 在 DOM 中动态执行脚本
+tags: DOM HTML JavaScript jQuery innerHTML
 ---
 
 在 HTML 中脚本以 `<script>` 来标记，通过设置其内容或`src`属性执行内联脚本或外部脚本。
@@ -12,34 +12,37 @@ tags: DOM HTML JavaScript jQuery
 
 <!--more-->
 
-# 执行内联脚本
+## 执行内联脚本
 
-为了插入内联脚本，可以创建一个`script`元素并设置其内容，插入到 DOM 即可立即执行。
-例如：
+为了插入内联脚本，可以创建一个`script`元素并设置其内容，插入到 DOM 即可 **立即执行**。例如：
 
 ```javascript
 var script = document.createElement('script');
 script.text = 'console.log("foo")';
+// 等价于
+// script.text = 'console.log("foo")';
+// script.innerText = 'console.log("foo")';
+// script.innerHTML = 'console.log("foo")';
 document.body.appendChild(script);
+console.log("bar");
 ```
 
-以下写法是等价的
+**立即执行** 是指 `.appendChild` 方法是阻塞的，脚本运行结束才返回。因此上述脚本的输出是：
 
-```javascript
-script.text = 'console.log("foo")';
-script.innerText = 'console.log("foo")';
-script.innerHTML = 'console.log("foo")';
+```
+foo
+bar
 ```
 
-需要注意的是内联脚本是否能够执行仍然受制于[CSP策略指令][csp]，
+此外，内联脚本是否能够被浏览器执行还取决于 [CSP策略指令][csp] 设置，
 该策略是由`Content-Security-Policy`响应头([rfc7762][rfc7762])控制的。
-例如下列设置将会禁止执行`harttle.com`以外的任何内联脚本。
+例如下列设置将会禁止执行`harttle.land`以外的任何内联脚本。
 
 ```
-Content-Security-Policy: script-src harttle.com;
+Content-Security-Policy: script-src harttle.land;
 ```
 
-# 执行外部脚本
+## 执行外部脚本
 
 插入并执行外部脚本的方法与内联脚本类似，只需设置`script.src`属性并插入到 DOM。
 例如：
@@ -55,7 +58,7 @@ document.body.appendChild(script);
 
 > 此外有一个细节可能需要注意：一旦设置了`src`属性，`<script>` 标签本身的所有内容就不会再被执行了。
 
-# innerHTML
+## innerHTML
 
 `innerHTML`属性可用来设置 DOM 内容，但不可用来插入并执行`<script>`。
 下面的内联脚本和外部脚本都不会被执行：
@@ -79,7 +82,7 @@ document.body.innerHTML = '<script>console.log("foo")</script>'
 
 > When inserted using the document.write() method, script elements execute (typically blocking further script execution or HTML parsing), but when inserted using innerHTML and outerHTML attributes, they do not execute at all. -- 4.12.1 [The script element][script] WHATWG
 
-# jQuery DOM Eval
+## jQuery DOM Eval
 
 我们知道使用 jQuery `html()` 方法时插入的脚本总是执行的，jQuery 会检查传入的内容，并执行其中的每一个脚本。
 源码在[src/core/DOMEval.js][domeval]：
@@ -93,7 +96,7 @@ function DOMEval( code, doc ) {
 }
 ```
 
-# 扩展阅读
+## 扩展阅读
 
 * CSP 策略指令：<https://developer.mozilla.org/zh-CN/docs/Web/Security/CSP/CSP_policy_directives>
 * MDN createDocumentFragment: <https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment>

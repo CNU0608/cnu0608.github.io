@@ -1,15 +1,14 @@
 ---
-layout: blog
 title: JavaScript显式类型转换与隐式类型转换
 tags: JavaScript 接口 弱类型 构造函数 类型转换
 ---
 
-本文谈谈JavaScript的类型转换，我们知道在JavaScript中声明变量不需指定类型，
-对变量赋值也没有类型检查，同时JavaScript允许隐式类型转换。这些特征说明JavaScript属于弱类型的语言。
+在 JavaScript 中声明变量不需指定类型，对变量赋值也没有类型检查，同时还允许隐式类型转换。
+这些特征说明 JavaScript 属于弱类型的语言。
 
-在强类型的C++中，多数情况下构造函数需要声明为`explicit`来避免隐式类型转换引起的误用
-（见[Item 15：资源管理类需要提供对原始资源的访问][item15]）。
-弱类型的语言中类型的误用会更加隐蔽，比如：
+在强类型的 C++ 中，多数情况下构造函数需要声明为 `explicit` 来禁止隐式类型转换，
+避免误用（见[Item 15：资源管理类需要提供对原始资源的访问][item15]）。
+弱类型的 JavaScript 中没有这一机制，比如下面的代码：
 
 ```javascript
 // 弹出对话框中输入1
@@ -20,11 +19,12 @@ var b = a + 1;
 console.log(b);   // 控制台输出 11   
 ```
 
-本文便来总结一下如何使用JavaScript进行类型转换，以及JavaScript中隐式类型转换的规则。
+目前 JavaScript 还无法阻止 `a` 被隐式转换为字符串。
+本文便来总结一下 JavaScript 的类型转换行为，以及隐式类型转换的规则。
 
 <!--more-->
 
-# 转换为字符串
+## 转换为字符串
 
 转换为字符串是应用程序中的常见操作，几乎所有语言都提供了将任何类型转换为字符串的通用接口。
 比如Java和C#的`toString`方法、C++的函数`std::to_string`，当然还有JavaScript的`toString`方法。
@@ -63,7 +63,7 @@ toString.call(null); // [object Null]
 toString.call(new MyClass);   // [object Object]
 ```
 
-# 转换为数字
+## 转换为数字
 
 字符串转换为数字也是常见需求，通常用来从用户输入或文件来获得一个`Number`。
 在C++中可以用`atoi`、`cin`、`scanf`等函数，在JavaScript中可以直接用`parseInt`和`parseFloat`。
@@ -90,7 +90,7 @@ var iNum3 = parseInt("10", 10);	//返回 10
 
 > 上述例子来自 w3school.com.cn: http://www.w3school.com.cn/js/pro_js_typeconversion.asp
 
-# 强制类型转换
+## 强制类型转换
 
 强制类型转换在C++中有两种方式：用括号将类型声明在变量之前；或者调用构造函数。
 在JavaScript中没有类型关键字（只有一个`var`来声明变量），因而只能调用构造函数：
@@ -103,14 +103,15 @@ Number(null)	          // => 0
 String(null)	          // => "null"
 ```
 
-# 隐式类型转换
+## 隐式类型转换
 
 隐式类型转换是最为隐蔽的地方，不加注意的话很容易在这一点上出错，对这一点的掌握也体现了JavaScript程序员经验。
 JavaScript会自动转换表达式中对象的类型以完成表达式求值。
 
-## 四则运算
+### 四则运算
 
-加法运算符`+`是双目运算符，只要其中一个是`String`类型，表达式的值便是一个`String`。
+加法运算符`+`是双目运算符，只要其中一个是`String`类型，表达式的值就是一个`String`，
+会隐式调用每个元的 `.toString()` 方法。
 
 对于其他的四则运算，只有其中一个是`Number`类型，表达式的值便是一个`Number`。
 
@@ -120,7 +121,10 @@ JavaScript会自动转换表达式中对象的类型以完成表达式求值。
 '1' * 'a'     // => NaN，这是因为parseInt(a)值为NaN，1 * NaN 还是 NaN
 ```
 
-## 判断语句
+不同类型的相加的行为比较复杂，也不一致，可以参考这里：
+<https://www.andronio.me/2017/10/22/js-operators-incensistency/>
+
+### 判断语句
 
 判断语句中的判断条件需要是`Boolean`类型，所以条件表达式会被隐式转换为`Boolean`。
 其转换规则同`Boolean`的构造函数。比如：
@@ -132,13 +136,15 @@ if(obj){
 }
 ```
 
-## Native代码调用
+### toString
 
-JavaScript宿主环境都会提供大量的对象，它们往往不少通过JavaScript来实现的。
-JavaScript给这些函数传入的参数也会进行隐式转换。例如BOM提供的`alert`方法接受`String`类型的参数：
+有些接口只支持字符串参数，会对传入值进行 `toString`。
+比如 JavaScript 宿主环境提供的接口：
 
 ```javascript
 alert({a: 1});    // => [object Object]
 ```
+
+这里传入任何对象都会被 `toString` 转为字符串。
 
 [item15]: /2015/08/05/effective-cpp-15.html

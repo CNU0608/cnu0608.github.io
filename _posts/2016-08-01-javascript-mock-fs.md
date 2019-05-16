@@ -12,7 +12,7 @@ tags: NPM Node.js 测试 Mock
 
 <!--more-->
 
-# 安装
+## 安装
 
 [`mock-fs`][mock-fs]和 [`mock-require`][mock-require]
 都是NPM软件包，在项目中可通过`npm`直接安装：
@@ -21,7 +21,7 @@ tags: NPM Node.js 测试 Mock
 npm install mock-fs mock-require --save
 ```
 
-# Mock fs 模块
+## Mock fs 模块
 
 通过`mock()`方法可以创建多个文件的Mock并立即生效，
 此后对[`fs`][fs]的调用都会访问这些Mock文件。
@@ -34,7 +34,7 @@ var mock = require('mock-fs');
 describe('fs', function() {
     beforeEach(function() {
         mock({
-            './CNAME': 'harttle.com',
+            './CNAME': 'harttle.land',
             './_config.yml': 'empty'
         });
     });
@@ -44,13 +44,13 @@ describe('fs', function() {
     describe('#readFileSync()', function() {
         it('should read all content', function() {
             var str = fs.readFileSync('CNAME', 'utf8');
-            expect(str).to.equal('harttle.com');
+            expect(str).to.equal('harttle.land');
         });
     });
 });
 ```
 
-# Mock require 机制
+## Mock require 机制
 
 [`mock-fs`][mock-fs]的原理是重写[`fs`][fs]模块的文件读写功能，重定向到Mock文件。
 所以对[`require`][require]并不起作用。

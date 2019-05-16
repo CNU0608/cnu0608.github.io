@@ -3,64 +3,18 @@
 
 @import 'mixins';
 @import 'variables';
-@import 'paper';
 @import 'scroll-top';
 @import 'markdown';
 @import 'global';
-@import 'hover-tag';
-@import 'jqcloud.scss';
-@import 'lib/monokai-syntax.scss';
-@import 'lib/social-share.scss';
+@import 'author-block';
+@import 'jumbotron';
+@import 'monokai-syntax.scss';
 
-.module-about{
-  @import 'module-about';
-}
-
-.module-404{
-  @import 'module-404';
-}
-
-.module-default{
-  @import 'module-default';
-}
-
-.module-index{
-  @import 'module-index';
-}
-
-.module-tags{
-  @import 'module-tags';
-}
-
-.module-archive{
-  @import 'module-archive';
-}
-
-.module-blog{
-  @import 'module-blog';
-}
-
-.module-author{
-  @import 'module-author';
-}
-
-.module-collection{
-  @import 'module-collection';
-}
-
-#footer{
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  font-size: 12px;
-  background-color: #000;
-  margin: 0;
-  opacity:0.9;
-  filter:alpha(opacity=90);
-}
-#footer .copyright{
-  color: #b6c0ce;
-  text-align: center;
-  margin: 10px 0;
-}
+@import 'page-about';
+@import 'page-404';
+@import 'page-collection';
+@import 'page-blog';
+@import 'page-index';
+@import 'page-archive';
+@import 'page-default';
+@import 'page-tags';

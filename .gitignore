@@ -1,5 +1,7 @@
 _site
 .DS_Store
+node_modules
+.vscode
 Gemfile.lock
 *.swp
 *.log
@@ -9,3 +11,4 @@ dump.rdb
 .sass-cache
 .jekyll-metadata
 _drafts/
+vendor/

@@ -1,20 +1,39 @@
 @import 'mixins';
 @import 'variables';
 
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  font-family: sans-serif;
+}
+html {
+  background: #333;
+}
 body {
-  position: relative; /* for scroll spy with absolute position */
-  color: #333;
-  font-size: 15px;
-  @include sans;
-  -webkit-font-smoothing: antialiased;
+  background: white;
 }
 
-a, a:hover, a:active, a:focus{
+@media (max-width: 767px) {
+  .hidden-xs {
+    display: none !important;
+  }
+}
+
+.pull-right {
+  float: right;
+}
+.hidden {
+  display: none;
+}
+
+a {
   color: $blue;
+  text-decoration: none;
 }
-
-.ias-spinner, .ias-noneleft{
-  margin-bottom: 30px;
+a:hover, a:active, a:focus{
+  color: $blue;
+  text-decoration: underline;
 }
 
 .btn-hover{
@@ -26,10 +45,18 @@ a, a:hover, a:active, a:focus{
   background: $blue;
 }
 
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.clearfix:after {
+  content: ' ';
+  display: table;
+  clear: both;
+}
 @media(min-width:768px){
-.container-fluid {
-padding: 0 30px;
-    margin: 0 auto;
+  .container {
+    padding: 0 30px;
   }
 }
 
@@ -40,4 +67,24 @@ padding: 0 30px;
 
 .text-center{
   text-align: center;
+}
+
+.tag{
+  color: $green;
+  padding: 0.1em 0.6em;
+  font-size: 0.9em; 
+  line-height: 1.4em;
+  border: 1px solid $green;
+  display: inline-block;
+  @include transition(color 0.3s);
+}
+.tag:hover, .tag:focus, .tag:active{
+  color: white;
+  background: $green;
+  text-decoration: none;
+}
+.ellipsis{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

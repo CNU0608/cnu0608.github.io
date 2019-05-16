@@ -20,7 +20,7 @@ indexDB、localStorage、sessionStorage 等一系列的存储 API，以及本文
 
 <!--more-->
 
-# 备受批评的 AppCache
+## 备受批评的 AppCache
 
 在 HTML5 (Section 7.9) 中引入的 Application Cache 备受批评的，如今已经被全面废弃。
 建议这部分开发者直接使用 Service Worker。
@@ -41,7 +41,7 @@ WHATWG HTML5 作为 Live Standard，也将 AppCache 标注为 Discouraged 并引
 
 ![whatwg html5 appcache](/assets/img/blog/pwa/whatwg-application-cache@2x.png)
 
-# 生命周期
+## 生命周期
 
 Service Worker 的使用过程很简单，在页面脚本中注册 Service Worker 文件所在的 URL，
 Service Worker 就开始安装和激活了。激活后的 Service Worker 就可以监听到功能事件了。
@@ -50,19 +50,19 @@ MDN 给出了很漂亮的生命周期图示：
 
 ![service worker lifecycle](https://mdn.mozillademos.org/files/12636/sw-lifecycle.png)
 
-# 缓存静态文件
+## 缓存静态文件
 
 引入 Service Worker 后首先可以进行的网站优化就是缓存静态文件和静态页面，这些页面立即就可以离线访问了。
 将页面加入缓存有两种方法：在 Service Worker 安装时添加，或者在请求真正发生时添加。
 
-## on install
+### on install
 
 在 Service Worker 注册时立即去获取并添加。下一次访问当前页面时已经可以离线。
 
 ```javascript
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open('harttle.com-v1.0.0').then(function(cache) {
+    caches.open('harttle.land-v1.0.0').then(function(cache) {
       return cache.addAll([
         '/css/main.css',
         '/js/main.js',
@@ -73,14 +73,14 @@ self.addEventListener('install', function(event) {
 });
 ```
 
-## on fetch
+### on fetch
 
 在请求发生时获取并添加。需要在 Service Worker 激活后（激活时请求已经结束）下一次访问时添加到缓存，再下一次访问可以离线。
 
 ```javascript
 self.addEventListener('fetch', function(event) {
   event.respondWith(
-    caches.open('harttle.com-v1.0.0').then(function(cache) {
+    caches.open('harttle.land-v1.0.0').then(function(cache) {
       caches.match(event.request).then(function(response) {
         return response || fetch(event.request).then(function(response) {
           cache.put(event.request, response.clone());
@@ -92,7 +92,7 @@ self.addEventListener('fetch', function(event) {
 });
 ```
 
-## 比较
+### 比较
 
 * 前者的优点是第二次访问即可离线，缺点是需要将需要缓存的 URL 在编译时插入到脚本中；
 * 后者的优点是无需更改编译过程，也不会产生额外的流量，缺点是需要多一次访问才能离线可用。
@@ -100,7 +100,7 @@ self.addEventListener('fetch', function(event) {
 除了静态的页面和文件之外，如果对 AJAX 数据加以适当的缓存可以实现真正的离线可用，
 要达到这一步可能需要对既有的 Web App 进行一些重构以分离数据和模板。
 
-# 版本更新
+## 版本更新
 
 Service Worker 在客户端进行页面缓存，那么服务器提供的 HTTP 缓存就需要配合，让两者更好地一起工作。
 PWA 的版本更新其实就是 Service Worker 的更新：**给 Service Worker 打版本号，资源文件使用该版本号作为 [CacheStorage][CacheStorage] 的键值**。
@@ -114,7 +114,7 @@ self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(
-        // VERION === 'harttle.com-v1.0.1'
+        // VERION === 'harttle.land-v1.0.1'
         cacheNames.filter(function(cacheName) {
           return cacheName !== VERSION
         }).map(function(cacheName) {
@@ -134,7 +134,7 @@ Service Worker 用来控制页面资源缓存，那么`sw.js`文件本身如何�
 [Service Worker 调试技巧](/2017/04/08/service-worker-debug.html) 一文。
 关于 Service Worker 的更新机制的更详细讨论，可参考 [Service Worker 更新机制](/2017/04/10/service-worker-update.html) 一文。
 
-# 兼容性考虑
+## 兼容性考虑
 
 目前 Service Worker 标准虽然仍处于草案阶段，但浏览器厂商已经在快速地跟进实现了。
 目前 Firefox 和 Chrome 均已发布支持 Service Worker 的版本，Safari 尚未明确表示支持。

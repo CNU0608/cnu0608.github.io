@@ -1,19 +1,19 @@
 ---
 title: 使用 Supertest 测试 Express.js 应用
-tags: NPM Node.js 缓存 工厂方法 Mocha Express 异步 测试
+tags: Node.js 缓存 工厂方法 Mocha Express.js 测试
 ---
 
 [supertest][st]提供了简单易用的客户代理，可以方便地用来测试Express.js应用。
 本文介绍如何在[Mocha][mocha]中使用[supertest][st]，
-以及测试Express应用涉及到的一些问题：
-包括如何在每个测试项之前正确地关闭上一个Express Server，
+以及测试 Express.js 应用涉及到的一些问题：
+包括如何在每个测试项之前正确地关闭上一个Express.js Server，
 以及如何避免`require`缓存造成的环境差异。
 
 <!--more-->
 
 > 关于如何使用Mocha测试Node.js代码，请参考[利用 Mocha 进行 BDD 风格测试][mocha]一文。
 
-# 一个简易的Express应用
+## 一个简易的Express应用
 
 先来写一个简单的Express应用，绑定`/`目录并返回`200 harttle`。
 下文中便来讨论如何正确地测试该应用。
@@ -30,7 +30,7 @@ var server = app.listen(3000, function () {
 module.exports = server;
 ```
 
-# Supertest
+## Supertest
 
 `supertest`提供了`.get()`, `.expect()`等方法来测试 Express `server`。
 下面给出一个简单的`supertest`使用示例。
@@ -60,7 +60,7 @@ describe('loading express', function () {
 });
 ```
 
-# 正确关闭 Express
+## 正确关闭 Express
 
 通常我们希望每项测试都在初始的环境中进行，
 于是在每项测试后使用`server.close()`关闭服务器，
@@ -76,7 +76,7 @@ afterEach(function (done) {
 });
 ```
 
-# 清除 require 缓存
+## 清除 require 缓存
 
 尽管我们重启了Express`server`，当`require('./server')`时Node.js
 仍然会返回上次`require`的缓存。通常的实践中应当用工厂方法来解决，
@@ -117,7 +117,7 @@ beforeEach(function () {
 });
 ```
 
-# 最终代码
+## 最终代码
 
 最终的测试代码如下：
 

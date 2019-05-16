@@ -2,72 +2,82 @@
 layout: default
 ---
 
-<div class="container-fluid module-index">
-  <div class="row">
-    <div class="content col-sm-8"> 
-      <div class="posts">
-        {% for post in paginator.posts %}
-        <div class="post">
-          <time>
-            <p class="day">{{post.date | date: '%d'}}</p>
-            <p class="month">{{post.date | date: '%Y, %b'}}</p>
-          </time>
-          <article>
-            <header>
-              <h1 class="title">
-                <a target="_blank" href="{{post.url}}">{{ post.title }}</a>
-              </h1>
-              <span class="tags">
-                {% for tag in post.tags %}
-                  <a class="tag" href="/tags.html#{{tag}}">{{tag}}</a>
-                {% endfor %}
-              </span>
-            </header>
-
-            <div class="md ">{{ post.excerpt }}</div>
-
-            <a class="more btn-hover pull-right" href="{{ post.url }}" target='_blank'> 继续阅读 </a>
-          </article>
+<div class="container page-index">
+    <div class="content">
+        <div class="posts">
+            {% for post in paginator.posts %}
+            <article>
+                <time>
+          <span class="day">{{post.date | date: '%d'}}</span>
+          <span class="month">{{post.date | date: '%Y, %b'}}</span>
+        </time>
+                <details open>
+                    <summary>
+                        <h1 class="ellipsis"> &#x27a2; <a href="{{post.url}}">{{ post.title }}</a> </h1>
+                        <p class="tags">
+                            {% for tag in post.tags %}
+                            <a class="tag" href="/tags.html#{{tag}}">{{tag}}</a> {% endfor %}
+                        </p>
+                    </summary>
+                    <div class="md excerpt">{{ post.excerpt }}</div>
+                </details>
+            </article>
+            {% endfor %}
         </div>
-        {% endfor %}
-      </div>
 
-      {% if paginator.next_page %}
-        <a class="pager-next-url" href="{{ paginator.next_page_path }}"></a>
-      {% endif %}
-
-      {% include latex.html %}
+        <p class="pager">
+            {% if paginator.previous_page %}
+            <a class="btn-hover" href="{{paginator.previous_page_path}}">上一页</a> {% endif %} {% if paginator.next_page %}
+            <a class="btn-hover pager-next-url" href="{{paginator.next_page_path}}">下一页</a> {% endif %}
+        </p>
+        {% include latex.html %}
     </div>
-    <aside class="hidden-xs col-sm-3 col-sm-offset-1">
-      {% include author.html %}
-      <section class="follow"></section>
-      <section class="collection-list">
-        <h4>系列</h4>
-        <ul class="list-unstyled">
-          <li>
-            <a href="/git-workflow.html">
-              Git 工作流（{{site.git-workflow.size}}篇）
-            </a>
-          </li>
-          <li>
-            <a href="/effective-cpp.html">
-              细读 Effective C++（{{site.effective-cpp.size}}篇）
-            </a>
-          </li>
-          <li>
-            <a href="/vim-practice.html">
-              Vim 修行之路（{{site.vim-practice.size}}篇）
-            </a>
-          </li>
-        </ul>
-      </section>
-      <section class="tag-list">
-        <h4>标签</h4>
-      </section>
+    <aside>
+        <section class="author-block">
+            <img src="/assets/img/avatar.jpg" alt="avatar">
+            <h2>{{site.title}}</h2>
+            <p>{{site.description}}</p>
+        </section>
+        <section class="follow">
+            <ul class="social-share">
+                <li class="social-share-item">
+                    <a href="https://github.com/cp9266/cp9266.github.io" style="background:#b5b5b5">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 440" style="transform:scale(.45)"><path d="M349 53a53 53 0 0 0-38-16c-16 0-29 5-39 16a53 53 0 0 0-16 38 54 54 0 0 0 27 48l-2 26c-2 7-4 14-8 20l-12 14c-4 4-9 8-17 12a259 259 0 0 1-45 17l-44 16V102c9-5 15-11 20-20a53 53 0 0 0-9-66 53 53 0 0 0-38-16c-15 0-28 5-39 16a53 53 0 0 0-16 39 54 54 0 0 0 27 47v234c-8 5-15 12-19 20-5 9-8 18-8 28 0 15 5 28 16 39s24 16 39 16 28-6 39-16c10-11 16-24 16-39a54 54 0 0 0-28-48v-7c0-13 4-23 12-29s24-12 49-20 45-16 58-23c42-24 64-64 64-118 8-5 15-12 20-20 5-9 7-18 7-28 0-15-5-28-16-38zM147 403c-5 5-11 8-19 8s-14-3-20-8c-5-5-8-12-8-19 0-8 3-14 8-20 6-5 12-8 20-8s14 3 19 8c6 6 8 12 8 20 0 7-2 14-8 19zm0-329c-5 6-11 8-19 8s-14-2-20-8c-5-5-8-12-8-19 0-8 3-14 8-20 6-5 12-8 20-8s14 3 19 8c6 6 8 12 8 20 0 7-2 14-8 19zm183 37c-5 5-12 8-19 8-8 0-14-3-20-8-5-6-8-12-8-20a27 27 0 0 1 27-27c8 0 15 3 20 8s8 12 8 19c0 8-3 14-8 20z" fill="#fff"/></svg>
+                    </a>
+                </li>
+                <li class="social-share-item">
+                    <a href="/feed.xml" style="background:#fa9b39">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff" style="transform:scale(.45) translate(4px,-2px)"><path d="M128 416a64 64 0 1 1-128 0 64 64 0 0 1 128 0zm175.7 47.2a304 304 0 0 0-287-287 16 16 0 0 0-16.7 16v48.1a16 16 0 0 0 14.9 16 224 224 0 0 1 208.8 208.8 16 16 0 0 0 16 14.9h48a16 16 0 0 0 16-16.8zm144.3.3A448.3 448.3 0 0 0 16.5 32 16 16 0 0 0 0 48v48a16 16 0 0 0 15.5 16 368 368 0 0 1 352.4 352.5 16 16 0 0 0 16 15.5h48a16 16 0 0 0 16-16.5z"/></svg>
+                    </a>
+                </li>
+                <li class="social-share-item">
+                    <a href="http://wpa.qq.com/msgrd?v=3&uin=734180379&site=qq&menu=yes" target="_blank" style="background: rgb(84, 132, 214);">
+                        <svg class="icon" fill="#fff" style="transform:scale(.43);" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="988"><path d="M154.285714 460.571429q-4.571429-10.857143-4.571428-29.714286 0-11.428571 6.285714-28t13.714286-25.714286q-0.571429-12.571429 4.285714-30.285714t12.857143-24.571429q0-79.428571 52.857143-164.857143T364 37.714286Q443.428571 0 549.142857 0q76 0 152 31.428571 28 12 51.428572 27.428572t40.571428 32 31.428572 38.857143 24 42.285714 18.571428 48.285714T881.714286 271.428571t12.571428 56l0.571429 2.857143q31.428571 47.428571 31.428571 85.714286 0 8-5.142857 22.857143t-5.142857 21.714286q0 0.571429 0.857143 2t2 2.857142 1.142857 2q44 65.142857 68.857143 122.571429T1013.714286 709.142857q0 24.571429-11.142857 57.142857t-31.714286 32.571429q-5.142857 0-11.142857-4.285714t-10.857143-10-10.857143-14.857143-9.142857-15.142857-7.714286-14.857143-5.142857-10q-0.571429-0.571429-1.714286-0.571429l-2.857143 2.285714q-33.714286 88-75.428571 127.428572 11.428571 11.428571 35.142857 22t39.428572 23.714286 20.285714 37.142857q-1.142857 2.285714-2.285714 9.142857t-4 10.285714q-36.571429 55.428571-172.571429 55.428572-30.285714 0-63.142857-5.142858t-56-11.428571-59.714286-17.142857q-8.571429-2.857143-13.142857-4-8-2.285714-26.285714-2.571429t-22.857143-0.857143q-23.428571 25.714286-72.857143 37.142858T341.714286 1024q-20 0-39.428572-0.857143t-53.142857-5.142857-57.714286-11.714286-42.571428-22.857143-18.571429-36.571428q0-22.857143 5.714286-34t23.428571-27.714286q6.285714-1.142857 23.142858-7.428571t28.285714-6.857143q2.285714 0 8-1.142857 1.142857-1.142857 1.142857-2.285715l-1.142857-1.714285q-27.428571-6.285714-61.714286-60.285715T115.428571 716l-2.857142-1.714286q-2.285714 0-6.857143 11.428572-10.285714 23.428571-31.142857 42.571428T30.285714 789.714286h-0.571428q-2.285714 0-3.428572-2.571429t-2.857143-3.142857q-13.142857-30.857143-13.142857-57.142857 0-157.142857 144-266.285714z" p-id="989"></path></svg>
+                    </a>
+                </li>
+                <li class="social-share-item">
+                    <a href="mailto:cp9266@gmail.com?subject=来自cp9266@gmail.io" style="background: rgb(84, 132, 214);">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff" style="transform:scale(.43)"><path d="M502 191c4-3 10 0 10 5v204c0 27-21 48-48 48H48c-26 0-48-21-48-48V196c0-5 6-8 10-5l154 114c21 15 56 47 92 47s72-33 92-47l154-114zM256 320c23 0 57-29 73-41 133-97 143-105 174-129 6-5 9-12 9-19v-19c0-26-22-48-48-48H48C22 64 0 86 0 112v19c0 7 3 14 9 19 31 24 41 32 174 129 16 12 50 41 73 41z"/></svg>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <section class="collection-list">
+            <h4>系列</h4>
+            <ul class="list-unstyled">
+                <li>
+                    <span class="pull-right">{{site.tags.Git-Workflow | size}}</span>
+                    <a href="/git-workflow.html"> Git 工作流 </a>
+                </li>
+                <li>
+                    <span class="pull-right">{{site.tags["Effective-C++"] | size}}</span>
+                    <a href="/effective-cpp.html"> 细读 Effective C++ </a>
+                </li>
+                <li>
+                    <span class="pull-right">{{site.tags.Vim-Practice | size}}</span>
+                    <a href="/vim-practice.html"> Vim 修行之路 </a>
+                </li>
+            </ul>
+        </section>
     </aside>
-  </div>
-  <script src="/assets/lib/social-share/social-share.min.js"></script>
-  <script src="/assets/lib/jquery-ias.min.js"></script>
-  <script src="/assets/js/index.js"></script>
 </div>
-

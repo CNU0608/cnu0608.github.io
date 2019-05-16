@@ -9,9 +9,9 @@ tags: AJAX AngularJS HTTP JavaScript Promise 链式调用
 > 在Angular应用中尽量使用`$http`而不是jQuery函数来进行AJAX请求，因为`$http`会在响应到达时触发Angular更新视图（`$digest`循环）。
 > 与此同时，`$http`还可以通过`$httpBackend`来Mock和单元测试。
 
-`$http`文档参见： https://docs.angularjs.org/api/ng/service/$http
+`$http`文档参见： <https://docs.angularjs.org/api/ng/service/$http>
 
-# 基本使用
+## 基本使用
 
 如果你熟悉了jQuery的AJAX操作，那么使用`$http`只是重新记住几个方法名而已。把`done`, `fail`, `always`换成`success`, `error`, `finally`：
 
@@ -36,7 +36,7 @@ finally(callback, notifyCallback);
 
 > Promise方法是可以链式调用的。
 
-# 配置`$httpProvider`
+## 配置`$httpProvider`
 
 `$http` Service定义在`ng` Module里，由`$httpProvider`提供。于是我们可以通过设置`$httpProvider`来配置`$http`的行为。比如，给HTTP请求插入一个拦截器：
 
@@ -59,11 +59,11 @@ someModule.config(['$httpProvider', function($httpProvider){
 
 还可以通过设置`$httpProvider`的`defaults`属性来进行请求/响应的转换（`transformRequest`, `transformResponse`）、设置请求的HTTP头字段（`headers`）。
 
-更多信息，请参考`$httpProvider`文档： https://docs.angularjs.org/api/ng/provider/$httpProvider
+更多信息，请参考`$httpProvider`文档： <https://docs.angularjs.org/api/ng/provider/$httpProvider>
 
 <!--more-->
 
-# 快捷方法
+## 快捷方法
 
 我们知道在jQuery中，使用`$.ajax()`可以产生一个HTTP请求，可以任意配置请求的字段。同时jQuery提供了`$.get`, `$.post`等更加快捷的函数。
 Angular的`$http`也是这样，可以直接调用`$http`函数来产生一个高度可配置的HTTP请求：

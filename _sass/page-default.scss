@@ -1,0 +1,60 @@
+@import 'mixins';
+@import 'variables';
+
+.page-default {
+    svg.logo {
+        position: relative;
+        top: 2px;
+        height: 32px;
+
+        .h {
+            fill: #5ABA59;
+        }
+
+        .rest {
+            fill: #b6c0ce;
+            font: normal 350px sans-serif;
+        }
+    }
+
+    header {
+        padding-top: 16px;
+        padding-bottom: 16px;
+        position: relative;
+        z-index: 1000;
+        background: $grey;
+        .logo{
+            font-size: 20px;
+            height: 38px;
+            line-height: 38px;
+            display: inline-block;
+            letter-spacing: 0.03em;
+            color: #b6c0ce;
+            transition: all 0.15s;
+            font-family: Georgia, serif;
+            text-decoration: none;
+            &:hover{
+                color: #fff;
+            }
+        }
+        nav a {
+            line-height: 38px;
+            margin-left: 1rem;
+            @include link-hover($light-grey, white);
+
+            @include media-xs {
+                margin-left: 0.5rem;
+            }
+        }
+    }
+
+    footer {
+        position: relative;
+        font-size: 14px;
+        padding: 12px 0;
+        text-align: center;
+        background-color: #333;
+        color: #b6c0ce;
+        z-index: 200;
+    }
+}

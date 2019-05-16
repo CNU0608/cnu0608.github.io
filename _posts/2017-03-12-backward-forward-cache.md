@@ -12,7 +12,7 @@ BF Cache 本来是一项浏览器优化，但在某些情况下（比如前端�
 
 <!--more-->
 
-# 缓存行为
+## 缓存行为
 
 BF Cache 是一种浏览器优化，HTML 标准并未指定其如何进行缓存，因此缓存行为是与浏览器实现相关的。
 
@@ -28,14 +28,14 @@ Desktop Firefox 暂停计时器的行为非常有趣，以下 HTML 中显示一�
 
 ```html
 <span id="timer-tick"></span>
-<a href="http://harttle.com">External Link</a>
+<a href="https://harttle.land">External Link</a>
 <script>
   var i = 0
   setInterval(() => document.querySelector('#timer-tick').innerHTML = i++, 1000)
 </script>
 ```
 
-# pagehide/pageshow 事件
+## pagehide/pageshow 事件
 
 会话（Session）中的某一个页面显示/隐藏时，会触发 `pagehide` 和 `pageshow` 事件。
 这两个事件都有一个 `persisted` 属性用来指示当前页面是否被 BF Cache 缓存。
@@ -49,9 +49,11 @@ window.onpageshow = function(event) {
 };
 ```
 
-注意无论页面是否被缓存 `pageshow` 总会触发，因此需要检测器 `persisted` 属性。
+注意 `pageshow` 不仅在显示被缓存的页面时触发，在第一次加载页面时也会触发。
+因此需要检测事件的 `persisted` 属性，页面第一次加载时它的值是 `false`。
+
 另外 `pageshow` 的时机总是在 `load` 事件之后。
-这一点很容易检测，下面的`pageshow`日志总在`load`之前：
+这一点很容易检测，比如下面的代码中 `pageshow` 日志总在 `load` 之前打印：
 
 ```javascript
 window.addEventListener('pageshow', function () {
@@ -62,7 +64,7 @@ window.addEventListener('load', function () {
 })
 ```
 
-# XHR 缓存
+## XHR 缓存
 
 同步（阻塞加载的）脚本发出的 XMLHttpRequest 也会被 Chrome 强制缓存，
 因此即使在断网的情况下后退到访问过的页面仍然是可以完美渲染的。
