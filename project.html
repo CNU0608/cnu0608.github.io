@@ -1,0 +1,148 @@
+---
+title: 公司项目
+layout: default
+---
+<style>
+.page-about .tags a {
+    margin-right: .5em;
+    margin-bottom: .5em;
+}
+.page-about .md.excerpt p,
+.page-about .md.excerpt h1,
+.page-about .md.excerpt h2,
+.page-about .md.excerpt h3,
+.page-about .md.excerpt h4,
+.page-about .md.excerpt h5,
+.page-about .md.excerpt h6,
+.page-about .md.excerpt b,
+.page-about .md.excerpt strong,
+.page-about .md.excerpt ul,
+.page-about .md.excerpt ol,
+.page-about .md.excerpt li{
+	color: #fff;
+}
+</style>
+<div class="page-about">
+    <div class="container">
+        <div style="min-height: 700px; padding-top: 60px;">
+            <h1 class="text-center" style="color: #fff;">相关项目</h1>
+            <br/><br/>
+            <div class="md excerpt">
+                <p><a href="https://www.digood.com/">多谷网络科技有限公司</a> 服务定位： 做支持78种语言一对一定制外贸企业网站、 SEO搜索排名优化、 SEM全球广告投放等。</p>
+				<br/>
+                <p><strong>客户项目:</strong></p>
+                <ol>
+				  <li>使用CodeIgniter框架参与后台交互。</li>
+				  <li>运用jQuery、bootstrap等框架库，提高团队开发效率。 </li>
+				  <li>部分定制功能使用webpack等依赖模块理和打包</li>
+				  <li>图片上传七牛云托管</li>
+				</ol>
+        		<p id="digood-project-box" class="tags"></p>
+        		<br/>
+                <p><strong>个人项目:</strong></p>
+                <ol>
+				  <li>使用CommonJS+webpack进行项目构建，采用Git进行版本控制，并且利用Hogan进行html模板渲染。</li>
+				  <li>商场后台使用react前端框架构建</li>
+				  <li>运用jQuery框架库提高开发效率。 </li>
+				  <li>部分定制功能使用webpack等依赖模块理和打包</li>
+				  <li>数据接口采用nginx反向代理</li>
+				</ol>
+        		<p id="digood-project-box" class="tags">
+        			<a class="tag" href="http://119.29.254.162/" target="_blank">购物商城</a>
+        			<a class="tag" href="http://119.29.254.162:4000" target="_blank">商城后台</a>
+        		</p>
+            </div>
+        </div>
+    </div>
+    <div class="links container">
+        <section class="thanks">
+            <h2>友情链接</h2>
+            <ul class="list-unstyled content">
+                <li><a href="https://xuexb.com/" target="_blank">前端小武的博客</a></li>
+                <li><a href="http://merrier.wang/" target="_blank">merrier 说</a></li>
+                <li><a href="https://best33.com/" target="_blank">做最好的三三</a></li>
+                <li><a href="https://www.dusaiphoto.com/" target="_blank">杜赛的个人网站</a></li>
+            </ul>
+        </section>
+    </div>
+</div>
+<script>
+(function() {
+    var dproject_box = document.getElementById('digood-project-box');
+    var arr_project = [{
+            "name": "东莞市硕耐特新能源有限公司",
+            "link": "//zh-cn.solarlet8888.digoodcms.com"
+        },
+        {
+            "name": "广州市威尼科技发展有限公司",
+            "link": "//en.wwwadmin.digoodcms.com"
+        },
+        {
+            "name": "深圳市得宝实业发展有限公司",
+            "link": "//en.debao.digoodcms.com"
+        },
+        {
+            "name": "东莞市宝科精密机械有限公司",
+            "link": "//en.baofengmachine.digoodcms.com"
+        },
+        {
+            "name": "东莞市达鑫橡胶电子有限公司",
+            "link": "//en.daxinrubber.digoodcms.com"
+        },
+        {
+            "name": "深圳柔享科技有限公司",
+            "link": "//en.comaas2018.digoodcms.com"
+        },
+        {
+            "name": "深圳路知音科技有限公司",
+            "link": "//en.cartizan.digoodcms.com"
+        },
+        {
+            "name": "东莞市博原喷雾净化设备有限公司",
+            "link": "//en.byspray.digoodcms.com"
+        },
+        {
+            "name": "郑州幸福热能设备有限公司",
+            "link": "//en.xingfureneng.digoodcms.com"
+        },
+        {
+            "name": "东莞市宇力木业有限公司",
+            "link": "//en.yulimuye.digoodcms.com"
+        },
+        {
+            "name": "广东廿陆赢实业有限公司",
+            "link": "//en.astsw88.digoodcms.com"
+        },
+        {
+            "name": "佛山市众志医疗科技有限公司",
+            "link": "//en.zhongzhiyiliao.digoodcms.com"
+        },
+        {
+            "name": "鑫业智能标签应用有限公司",
+            "link": "//en.xinyerfid.digoodcms.com"
+        },
+        {
+            "name": "郑州冠玥医疗设备有限公司",
+            "link": "//en.bpmeds.digoodcms.com"
+        },
+        {
+            "name": "勤冠电子科技有限公司",
+            "link": "//en.kingone.digoodcms.com"
+        },
+        {
+            "name": "温州市海德何茜游乐设备有限公司",
+            "link": "//en.hideoseek.digoodcms.com"
+        },
+        {
+            "name": "威尼科技有限公司",
+            "link": "//en.wwwadmin.digoodcms.com"
+        }
+    ];
+    var result_html = '';
+    for (var i = 0; i < arr_project.length; i++) {
+        result_html += '<a class="tag" href="' + arr_project[i]["link"] + '" target="_blank">' + arr_project[i]["name"] + '</a>';
+    }
+
+    dproject_box.innerHTML = result_html;
+})();
+</script>
