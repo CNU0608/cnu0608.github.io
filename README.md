@@ -1,8 +1,6 @@
 HarttleLand 博客主题
 =================
 
-本仓库是 **[Harttle Land](https://harttle.land)** 的源码，欢迎 Clone 和 Fork。
-
 ## 功能
 
 * 代码高亮
